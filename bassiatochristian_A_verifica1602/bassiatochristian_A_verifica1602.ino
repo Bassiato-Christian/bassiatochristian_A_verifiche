@@ -18,10 +18,18 @@ void loop() {
   Serial.println("Inserisci quanti cicli devono fare i led");
   while (Serial.available() == 0);
   byteRicevuto = Serial.readString();
+  delay(1000);
+  while (cicli <= 0){
+    Serial.println("Hai inserito un numero negativo, inseriscilo maggiore di 0");
+    while (Serial.available() == 0);
+    byteRicevuto = Serial.readString();
+    cicli = byteRicevuto.toInt();
+    delay(1000);
+  }
   Serial.print("Cicli ricevuti: ");
   Serial.println(byteRicevuto);
   cicli = byteRicevuto.toInt();
-  durata = random(1,10);
+  durata = random(1,5);
   durata = durata*1000;  //Qui moltiplico il numero random per mille in quanto il range del random è 1,10. Lo moltiplico per mille perchè la durata è in millisecondi
   Serial.print("La durata random è: ");
   Serial.print(durata);
